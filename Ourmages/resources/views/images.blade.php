@@ -40,14 +40,13 @@
                     </div>
                     <div class="item-info">
                         <h4 class="text-dark no-margin p-t-10 title semi-bold">{{$dt->_id}}</h4>
-                        <a href="#" class="btn btn-primary">View</a>
+                        <a href="/image/{{$dt->_id}}" class="btn btn-primary">View</a>
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit{{$dt->_id}}">Update</button>
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$dt->_id}}">Delete</button>                    
                     <!--END ITEM-INFO-->
                     <div class="clearfix">
                     </div>
                 </li>
-
                 @endforeach
             </ul>
         </div>

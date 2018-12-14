@@ -10,7 +10,27 @@ use Validator;
 
 class ImageController extends Controller
 {
-	public function getImage(){
+	public function showImage($id){
+		$token = session()->get('token');
+		$user_id = session()->get('user_id');
+
+    	$otp = "Bearer ".$token;
+
+    	$client = new Client([
+		    'headers' => [ 
+		    	'Content-Type' => 'application/json',
+		    	'Authorization' => $otp
+		    ]
+		]);
+
+		$response = $client->get('127.0.0.1:8000/api/photo/' .$id. '?user_id=' . $user_id);
+
+		$sended = json_decode($response->getBody());
+
+		return view('view_image')->with(['data' => $sended]);
+	}
+
+	public function getImages(){
 		$token = session()->get('token');
 		$user_id = session()->get('user_id');
 
