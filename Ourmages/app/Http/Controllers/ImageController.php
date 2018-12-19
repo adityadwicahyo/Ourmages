@@ -23,7 +23,7 @@ class ImageController extends Controller
 		    ]
 		]);
 
-		$response = $client->get('127.0.0.1:8000/api/photo/' .$id. '?user_id=' . $user_id);
+		$response = $client->get(env('APP_URL').'/api/photo/' .$id. '?user_id=' . $user_id);
 
 		$sended = json_decode($response->getBody());
 
@@ -43,9 +43,10 @@ class ImageController extends Controller
 		    ]
 		]);
 
-		$response = $client->get('127.0.0.1:8000/api/photo?user_id=' . $user_id);
+		$response = $client->get(env('APP_URL').'/api/photo?user_id=' . $user_id);
 
 		$sended = json_decode($response->getBody());
+//		dd($sended);
 
 		return view('images')->with(['data' => $sended]);
 	}
@@ -80,7 +81,7 @@ class ImageController extends Controller
 		    ]
 		]);
 
-		$response = $client->post('127.0.0.1:8000/api/photo',
+		$response = $client->post(env('APP_URL').'/api/photo',
 		    ['body' => json_encode(
 		        [
 		        	'user_id' => $user_id,
@@ -109,7 +110,7 @@ class ImageController extends Controller
 		    ]
 		]);
 
-		$response = $client->delete('127.0.0.1:8000/api/photo/' .$request->id. '?user_id=' . $user_id);
+		$response = $client->delete(env('APP_URL').'/api/photo/' .$request->id. '?user_id=' . $user_id);
 
 		$sended = json_decode($response->getBody());
 
@@ -140,7 +141,7 @@ class ImageController extends Controller
 		$extension = $request->file('file')->extension();
 		$image = "data:image/" .$extension. ";base64," . $file;
 
-		$response = $client->post('127.0.0.1:8000/api/photo/' .$request->id. '?user_id=' . $user_id,
+		$response = $client->post(env('APP_URL').'/api/photo/' .$request->id. '?user_id=' . $user_id,
 		    ['body' => json_encode(
 		        [
 		        	'user_id' => $user_id,
@@ -154,3 +155,7 @@ class ImageController extends Controller
     	return redirect()->back()->with('success', 'Gambar berhasil diubah.');
     }
 }
+
+
+
+
