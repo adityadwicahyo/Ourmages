@@ -84,6 +84,7 @@ class ImageController extends Controller
 		    ['body' => json_encode(
 		        [
 		        	'user_id' => $user_id,
+		        	'album' => $request->album,
 		            'photo' => $image
 		        ]
 		    )]
@@ -152,5 +153,67 @@ class ImageController extends Controller
 		$sended = json_decode($response->getBody());
 
     	return redirect()->back()->with('success', 'Gambar berhasil diubah.');
+    }
+
+    public function getAlbums(){
+    	$token = session()->get('token');
+		$user_id = session()->get('user_id');
+
+    	$otp = "Bearer ".$token;
+
+    	$client = new Client([
+		    'headers' => [ 
+		    	'Content-Type' => 'application/json',
+		    	'Authorization' => $otp
+		    ]
+		]);
+
+		$response = $client->get('127.0.0.1:8000/api/album/list?user_id=' . $user_id);
+
+		$sended = json_decode($response->getBody());
+
+		//dd($sended);
+
+		return view('albums')->with(['data' => $sended]);
+    }
+
+    public function getImagesInAlbum($album){
+    	$token = session()->get('token');
+		$user_id = session()->get('user_id');
+
+    	$otp = "Bearer ".$token;
+
+    	$client = new Client([
+		    'headers' => [ 
+		    	'Content-Type' => 'application/json',
+		    	'Authorization' => $otp
+		    ]
+		]);
+
+		$response = $client->get('127.0.0.1:8000/api/album?user_id=' .$user_id. '&album=' .$album);
+
+		$sended = json_decode($response->getBody());
+
+		return view('images')->with(['data' => $sended, 'album' => $album]);
+    }
+
+    public function updateImagesInAlbum(Request $request){
+    	$token = session()->get('token');
+		$user_id = session()->get('user_id');
+
+    	$otp = "Bearer ".$token;
+
+    	$client = new Client([
+		    'headers' => [ 
+		    	'Content-Type' => 'application/json',
+		    	'Authorization' => $otp
+		    ]
+		]);
+
+		$response = $client->get('127.0.0.1:8000/api/album?user_id=' .$user_id. '&album=' .$album);
+
+		$sended = json_decode($response->getBody());
+
+		return view('images')->with(['data' => $sended, 'album' => $album]);
     }
 }

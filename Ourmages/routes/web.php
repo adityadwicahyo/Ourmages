@@ -21,6 +21,9 @@ Route::middleware(['auth.user'])->group(function () {
 	Route::post('/image/add', 'ImageController@addImage');
 	Route::post('/image/update', 'ImageController@updateImage');
 	Route::post('/image/delete', 'ImageController@deleteImage');
+
+	Route::get('/albums', 'ImageController@getAlbums');
+	Route::get('/album/{album}', 'ImageController@getImagesInAlbum');
 });
 
 Route::get('/auth', 'AuthController@showAuth');

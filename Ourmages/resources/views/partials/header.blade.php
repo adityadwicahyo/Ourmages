@@ -16,6 +16,7 @@
                     <li><a href="/">Home</a></li>
                     @if(session()->has('token'))
                     <li><a href="/images">Images</a></li>
+                    <li><a href="/albums">Albums</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user"> </i> {{session()->get('name')}}
                             <span class="caret"></span></a>

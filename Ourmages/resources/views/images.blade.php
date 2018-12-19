@@ -6,7 +6,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Your Images</h2>
+                    @if(isset($album))
+                        <h2>Your Images in <b>{{$album}}</b></h2>
+                    @else
+                        <h2>Your Images</h2>
+                    @endif
                 </div>
                 <div class="col-md-6 p-t-20 xs-no-padding xs-p-l-20">
                     <div class="portfolio-filter">
@@ -40,6 +44,7 @@
                     </div>
                     <div class="item-info">
                         <h4 class="text-dark no-margin p-t-10 title semi-bold">{{$dt->_id}}</h4>
+                        <p style="color: grey"><b>Album :</b> {{$dt->album}}</p>
                         <a href="/image/{{$dt->_id}}" class="btn btn-primary">View</a>
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit{{$dt->_id}}">Update</button>
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$dt->_id}}">Delete</button>                    
@@ -70,6 +75,10 @@
                     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">File</label>
                     <div class="col-sm-10">
                         <input name="file" type="file" class="form-control form-control-sm" required="required">
+                    </div>
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Album</label>
+                    <div class="col-sm-10">
+                        <input name="album" type="text" class="form-control form-control-sm" required="required">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
