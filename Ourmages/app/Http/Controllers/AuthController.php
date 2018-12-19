@@ -19,7 +19,7 @@ class AuthController extends Controller
 		    'headers' => [ 'Content-Type' => 'application/json' ]
 		]);
 
-		$response = $client->post('127.0.0.1:8000/api/auth/login',
+		$response = $client->post(env('APP_URL').'/api/auth/login',
 		    ['body' => json_encode(
 		        [
 		            'email' => $request->email,
@@ -48,7 +48,7 @@ class AuthController extends Controller
 		    ]
 		]);
 
-		$response = $client->get('127.0.0.1:8000/api/user');
+		$response = $client->get(env('APP_URL').'/api/user');
 
 		$sended = json_decode($response->getBody());
 
@@ -69,7 +69,7 @@ class AuthController extends Controller
 		    ]
 		]);
 
-		$response = $client->post('127.0.0.1:8000/api/auth/logout',
+		$response = $client->post(env('APP_URL').'/api/auth/logout',
 		    ['body' => json_encode(
 		        [
 		            'token' => $token
@@ -94,7 +94,7 @@ class AuthController extends Controller
 		    'headers' => [ 'Content-Type' => 'application/json' ]
 		]);
 
-		$response = $client->post('127.0.0.1:8000/api/auth/register',
+		$response = $client->post(env('APP_URL').'/api/auth/register',
 		    ['body' => json_encode(
 		        [
 		        	'name' => $request->name,
