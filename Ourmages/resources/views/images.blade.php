@@ -101,13 +101,18 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="/image/update" method="POST" enctype="multipart/form-data">
+            <form action="/image/album/update" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group row">
-                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">File</label>
+                    {{-- <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">File</label>
                     <div class="col-sm-10">
                         <input type="hidden" name="id" value="{{$dt->_id}}">
                         <input name="file" type="file" class="form-control form-control-sm" required="required">
+                    </div> --}}
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Album</label>
+                    <div class="col-sm-10">
+                        <input type="hidden" name="id" value="{{$dt->_id}}">
+                        <input name="album" type="text" class="form-control form-control-sm" required="required" value="{{$dt->album}}">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">Update</button>

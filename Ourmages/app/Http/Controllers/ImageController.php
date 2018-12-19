@@ -169,7 +169,7 @@ class ImageController extends Controller
 		    ]
 		]);
 
-		$response = $client->get('127.0.0.1:8000/api/album/list?user_id=' . $user_id);
+		$response = $client->get(env('APP_URL').'/api/album/list?user_id=' . $user_id);
 
 		$sended = json_decode($response->getBody());
 
@@ -191,7 +191,7 @@ class ImageController extends Controller
 		    ]
 		]);
 
-		$response = $client->get('127.0.0.1:8000/api/album?user_id=' .$user_id. '&album=' .$album);
+		$response = $client->get(env('APP_URL').'/api/album?user_id=' .$user_id. '&album=' .$album);
 
 		$sended = json_decode($response->getBody());
 
@@ -211,11 +211,22 @@ class ImageController extends Controller
 		    ]
 		]);
 
-		$response = $client->get('127.0.0.1:8000/api/album?user_id=' .$user_id. '&album=' .$album);
+		// $file = base64_encode(file_get_contents($request->file('file')));
+		// $extension = $request->file('file')->extension();
+		// $image = "data:image/" .$extension. ";base64," . $file;
+
+		$response = $client->post(env('APP_URL').'/api/photo/' .$request->id. '/album',
+		    ['body' => json_encode(
+		        [
+		        	'user_id' => $user_id,
+		        	'album' => $request->album
+		        ]
+		    )]
+		);
 
 		$sended = json_decode($response->getBody());
 
-		return view('images')->with(['data' => $sended, 'album' => $album]);
+    	return redirect()->back()->with('success', 'Album berhasil diubah.');
     }
 }
 
